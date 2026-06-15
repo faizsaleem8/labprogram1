@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTML Page</title>
+</head>
+<body>
+    <h1>Welcome to the simple HTML page</h1>
+    <p>This is a basic HTML document created for demonstration.</p>
+    <p>
+    3
+    from flask import Flask 
+    app = Flask(__name__) 
+    @app.route('/') 
+    def hello_world(): 
+    return 'Hello, Docker!' 
+    if __name__ == '__main__': 
+    app.run(host='0.0.0.0', port=5000)
+    
+    # Use the official Python image from Docker Hub 
+    FROM python:3.8-slim 
+    # Set the working directory inside the container 
+    WORKDIR /app 
+    # Copy the local app file into the container 
+    COPY app.py . 
+    # Install Flask 
+    RUN pip install flask 
+    # Expose port 5000 for the web app 
+    EXPOSE 5000 
+    # Command to run the app 
+    CMD ["python", "app.py"]
+    
+    docker build -t python-flask-app .
+    
+    docker run -p 5000:5000 python-flask-app
+    
+    6
+    pipeline {
+        agent any
+    
+        stages {
+            stage('Prepare Workspace') {
+                steps {
+                    bat 'copy "C:\\Users\\aumar\\OneDrive\\Desktop\\hello.py" .'
+                }
+            }
+    
+            stage('Code Analysis') {
+                environment {
+                    scannerHome = tool 'sonar'
+                }
+    
+                steps {
+                    withSonarQubeEnv('sonar') {
+                        bat """
+                        ${scannerHome}\\bin\\sonar-scanner.bat ^
+                        -Dsonar.projectKey=hello-python ^
+                        -Dsonar.projectName=hello-python ^
+                        -Dsonar.projectVersion=1.0 ^
+                        -Dsonar.sources=.
+                        """
+                    }
+                }
+            }
+        }
+    }
+    
+    docker build -t demo-app .
+    
+    
+    
+    
+    9
+    plugins {
+        id 'java'
+    }
+    
+    group = 'com.example'
+    version = '1.0-SNAPSHOT'
+    
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+    }
+    
+    rootProject.name = 'demo-project 
+    
+    mvn archetype:generate -DgroupId=com.example -DartifactId=demo-project -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+</p>
+</body>
+</html>
